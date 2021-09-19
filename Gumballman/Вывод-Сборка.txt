@@ -1,0 +1,13 @@
+﻿Сборка начата…
+1>------ Сборка начата: проект: Assembly-CSharp, Конфигурация: Debug Any CPU ------
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(78,40,78,57): warning CS0649: Полю "PlayerControllerExample.Movement2D._topRaycastLength" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию 0.
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(80,42,80,61): warning CS0649: Полю "PlayerControllerExample.Movement2D._innerRaycastOffset" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию .
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(73,40,73,58): warning CS0649: Полю "PlayerControllerExample.Movement2D._wallRaycastLength" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию 0.
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(68,40,68,60): warning CS0649: Полю "PlayerControllerExample.Movement2D._groundRaycastLength" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию 0.
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(23,44,23,63): warning CS0649: Полю "PlayerControllerExample.Movement2D._cornerCorrectLayer" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию .
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(79,42,79,60): warning CS0649: Полю "PlayerControllerExample.Movement2D._edgeRaycastOffset" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию .
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(21,44,21,56): warning CS0649: Полю "PlayerControllerExample.Movement2D._groundLayer" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию .
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(69,42,69,62): warning CS0649: Полю "PlayerControllerExample.Movement2D._groundRaycastOffset" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию .
+1>D:\Uniti Builds\Gumballman\Assets\Scripts\PlayerControllerExample.cs(22,44,22,54): warning CS0649: Полю "PlayerControllerExample.Movement2D._wallLayer" нигде не присваивается значение, поэтому оно всегда будет иметь значение по умолчанию .
+1>  Assembly-CSharp -> D:\Uniti Builds\Gumballman\Temp\bin\Debug\Assembly-CSharp.dll
+========== Сборка: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
