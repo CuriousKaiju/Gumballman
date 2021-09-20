@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 418019499}
   - component: {fileID: 418019498}
   - component: {fileID: 418019497}
+  - component: {fileID: 418019502}
   - component: {fileID: 418019501}
   m_Layer: 0
   m_Name: Player
@@ -559,7 +560,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 418019496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 525e7f83f2bfc56448f0973d666fafaf, type: 3}
+  m_Script: {fileID: 11500000, guid: eccee5c88c5ba584aaf76092dfb0fc76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rightButton: 100
@@ -567,8 +568,26 @@ MonoBehaviour:
   _upButton: 0
   _downButton: 0
   _movmentAcceleration: 10
-  _maxMoveSpeed: 4
-  _linearDrug: 5
+  _maxMoveSpeed: 5
+  _linearDrug: 4
+--- !u!114 &418019502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418019496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5868a0fb9373147b0b9be8a96a7088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpButton: 0
+  _groundLM:
+    serializedVersion: 2
+    m_Bits: 256
+  _jumpForce: 2
+  _raycastLength: 0.55
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
