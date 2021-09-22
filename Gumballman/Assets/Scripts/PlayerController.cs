@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxMoveSpeed;
     [SerializeField] private float _linearGroundDrug;
     private float _horizontalDirection;
-    private bool _facingRight;
+    private bool _facingRight = true;
     private bool _changingDirection => (_rb2D.velocity.x > 0 && _horizontalDirection < 0) || (_rb2D.velocity.x < 0 && _horizontalDirection > 0);
 
     [Header("JUMP VARIABLES")]
