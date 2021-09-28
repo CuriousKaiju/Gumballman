@@ -43,7 +43,7 @@ public class BubbleFunctions : MonoBehaviour
     }
     public void CollisionEnabler()
     {
-       
+        DestroyInsideEnemy();
         _animator.SetTrigger("TriggerWithPlayer");
         _bubbleCollider.enabled = false;
     }
@@ -70,6 +70,7 @@ public class BubbleFunctions : MonoBehaviour
     {
         if (_timeCounterForVertical >= _timeForVertical)
         {
+            DestroyInsideEnemy();
             CollisionEnabler();
         }
 
@@ -82,4 +83,22 @@ public class BubbleFunctions : MonoBehaviour
     {
         _bubbleCollider.enabled = true;
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyForBubble"))
+        {
+            Debug.Log("Сработало");
+            collision.gameObject.transform.SetParent(gameObject.transform);
+            collision.transform.localPosition = new Vector3(0, 0, 0);
+            collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        }
+    }
+    private void DestroyInsideEnemy()
+    {
+        if (gameObject.transform.childCount > 0)
+        {
+            Destroy(gameObject.transform.GetChild(0).gameObject);
+        }
+    }
+
 }

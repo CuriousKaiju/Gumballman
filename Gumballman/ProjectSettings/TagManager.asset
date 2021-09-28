@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bubble
+  - Enemies
+  - EnemyForBubble
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - 
   - Ground
   - 
-  - 
-  - 
+  - Enemies
+  - Player
   - 
   - 
   - 
@@ -48,9 +50,15 @@ TagManager:
   - name: Ground
     uniqueID: 4171479171
     locked: 0
-  - name: Player
+  - name: Enemies
     uniqueID: 399623843
     locked: 0
-  - name: UI
+  - name: Bubble
     uniqueID: 987061853
+    locked: 0
+  - name: Player
+    uniqueID: 63456083
+    locked: 0
+  - name: UI
+    uniqueID: 2972269129
     locked: 0

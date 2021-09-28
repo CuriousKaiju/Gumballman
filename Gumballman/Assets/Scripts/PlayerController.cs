@@ -43,8 +43,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _bubbleJumpForce;
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _attackSpeedCounter;
-   
-    
+
+    [Header("GET DAMAGE VARIABLES")]
+    [SerializeField] private float _getDamageForce;
+
+
     private BubbleFunctions _presentBubble; 
     private bool _itIsBubbleJump;
 
@@ -216,7 +219,14 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.GetComponent<BubbleFunctions>().CollisionEnabler();
             BubbleJump();
         }
+        if (collision.gameObject.CompareTag("Enemies"))
+        {
+            _rb2D.velocity = new Vector2(0, 0);
+            _rb2D.AddForce(new Vector2(-_horizontalDirection, 0) * _getDamageForce, ForceMode2D.Impulse);
+            GetDamage();
+        }
     }
+    
     private void BubbleSpawn()
     {
         if (_presentBubble != null)
@@ -237,6 +247,12 @@ public class PlayerController : MonoBehaviour
         }
         _attackSpeedCounter = 0;
     }
+    private void GetDamage()
+    {
+        Debug.Log("GetDamage");
+        _animator.SetTrigger("GetDamage");
+    }
     
+
 
 }
