@@ -7,6 +7,7 @@ TagManager:
   - Bubble
   - Enemies
   - EnemyForBubble
+  - BubbleStart
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - 
   - Enemies
   - Player
-  - 
-  - 
+  - Editor
+  - EnemiesWothoutCollision
   - 
   - 
   - 
@@ -41,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Editor
+    uniqueID: 1842101035
+    locked: 0
   - name: Back
     uniqueID: 744478037
     locked: 0

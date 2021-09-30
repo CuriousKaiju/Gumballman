@@ -79,18 +79,23 @@ public class BubbleFunctions : MonoBehaviour
         _timeCounterForVertical += Time.deltaTime;
 
     }
-    public void ColliderActivation()
-    {
-        _bubbleCollider.enabled = true;
-    }
-    private void OnTriggerStay2D(Collider2D collision)
+    
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("EnemyForBubble"))
         {
-            Debug.Log("Сработало");
+            if(!_phaseType)
+            {
+                _phaseType = true;
+                _finishPos = collision.gameObject.transform.position;
+            }
             collision.gameObject.transform.SetParent(gameObject.transform);
-            collision.transform.localPosition = new Vector3(0, 0, 0);
+            collision.transform.localPosition = new Vector3(0, 0.25f, 0);
+            collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            collision.gameObject.transform.localScale = new Vector3(1.792735f, 1.792735f, 1.792735f);
+            collision.gameObject.GetComponent<SlimeMover>().enabled = false;
+
         }
     }
     private void DestroyInsideEnemy()
@@ -99,6 +104,10 @@ public class BubbleFunctions : MonoBehaviour
         {
             Destroy(gameObject.transform.GetChild(0).gameObject);
         }
+    }
+    private void ChangeTagToBubble()
+    {
+        gameObject.tag = "Bubble";
     }
 
 }
