@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb2D;
     private Transform _transform;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     [Header("LAYER MASKS")]
     [SerializeField] private LayerMask _groundLM;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _groundRaycastLength;
     [SerializeField] private bool _onGround;
     [SerializeField] private Vector3 _shifRaycastPosition;
+    [SerializeField] GameObject _LoseParticles;
 
     [Header("BUBBLE VARIABLES")]
     [SerializeField] private GameObject _bubbleObject;
@@ -47,16 +49,25 @@ public class PlayerController : MonoBehaviour
     [Header("GET DAMAGE VARIABLES")]
     [SerializeField] private float _getDamageForce;
 
-
+    private bool _canGetDamage = true;
     private BubbleFunctions _presentBubble; 
     private bool _itIsBubbleJump;
 
+    private void Awake()
+    {
+        GameEvents.GameLose += PlayerLose;
+    }
+    private void OnDestroy()
+    {
+        GameEvents.GameLose -= PlayerLose;
+    }
 
     void Start()
     {
         _rb2D = gameObject.GetComponent<Rigidbody2D>();
         _transform = gameObject.GetComponent<Transform>();
         _animator = gameObject.GetComponent<Animator>();
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -219,14 +230,51 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.GetComponent<BubbleFunctions>().CollisionEnabler();
             BubbleJump();
         }
-        if (collision.gameObject.CompareTag("Enemies"))
+        
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "SlimePlayerCollision")
         {
-            _rb2D.velocity = new Vector2(0, 0);
-            _rb2D.AddForce(new Vector2(-_horizontalDirection, 0) * _getDamageForce, ForceMode2D.Impulse);
-            GetDamage();
+            if (_rb2D.velocity.y < 0 && !_onGround)
+            {
+                collision.GetComponentInParent<SlimeMover>().Destroyer();
+                BubbleJump();
+            }
+            else if (_canGetDamage)
+            {
+                GetDamage();
+            }
+        }
+        else if (collision.gameObject.name == "FlowerPlayerCollision")
+        {
+            if (_rb2D.velocity.y < 0 && !_onGround)
+            {
+                collision.GetComponentInParent<FlowerFunctions>().Destroyer();
+                BubbleJump();
+            }
+            else if (_canGetDamage)
+            {
+                GetDamage();
+            }
+        }
+        else if (collision.gameObject.name == "TurtlePlayerCollision")
+        {
+            if (_canGetDamage)
+            {
+                GetDamage();
+            }
+        }
+        else if (collision.gameObject.CompareTag("Bullet"))
+        {
+            if (_canGetDamage)
+            {
+                GetDamage();
+                collision.gameObject.GetComponent<BulletOfFlower>().Destroyer();
+            }
         }
     }
-    
+
     private void BubbleSpawn()
     {
         if (_presentBubble != null)
@@ -247,12 +295,68 @@ public class PlayerController : MonoBehaviour
         }
         _attackSpeedCounter = 0;
     }
-    private void GetDamage()
+    public void GetDamage()
     {
-        Debug.Log("GetDamage");
+        _canGetDamage = false;
+        _rb2D.velocity = new Vector2(0, 0);
+        if (_facingRight)
+        {
+            _rb2D.AddForce(new Vector2(-1, 0) * _getDamageForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            _rb2D.AddForce(new Vector2(1, 0) * _getDamageForce, ForceMode2D.Impulse);
+        }
+        GameEvents.CallHpChangeEvent(1);
         _animator.SetTrigger("GetDamage");
+        StartCoroutine("Invisible");
+
     }
-    
+    IEnumerator Invisible()
+    {
+        for (float a = 1f; a >= 0.2f; a -= 0.05f)
+        {
 
+            Color color = _spriteRenderer.material.color;
+            color.a = a;
+            _spriteRenderer.material.color = color;
+            yield return new WaitForSeconds(0.05f);
+        }
 
+        for (float a = 0.5f; a <= 0.8f; a += 0.05f)
+        {
+            Color color = _spriteRenderer.material.color;
+            color.a = a;
+            _spriteRenderer.material.color = color;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        for (float a = 1f; a >= 0.2f; a -= 0.05f)
+        {
+            Color color = _spriteRenderer.material.color;
+            color.a = a;
+            _spriteRenderer.material.color = color;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        for (float a = 0.5f; a <= 1f; a += 0.05f)
+        {
+            Color color = _spriteRenderer.material.color;
+            color.a = a;
+            _spriteRenderer.material.color = color;
+            yield return new WaitForSeconds(0.05f);
+        }
+        _canGetDamage = true;
+    }
+    public void PlayerGetDamageFromFire()
+    {
+        _canGetDamage = true;
+        Instantiate(_LoseParticles, _transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
+    }
+    public void PlayerLose()
+    {
+        Instantiate(_LoseParticles, _transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }

@@ -20,6 +20,7 @@ public class BubbleFunctions : MonoBehaviour
     private float _timeCounterForVertical;
 
     private bool _phaseType;
+    private bool _MobInside;
 
     public int _moveDirection = 1;
     public Vector2 _spawnPosition = new Vector2(0,0);
@@ -84,17 +85,40 @@ public class BubbleFunctions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyForBubble"))
         {
-            if(!_phaseType)
+            if (!_phaseType && !_MobInside)
             {
                 _phaseType = true;
                 _finishPos = collision.gameObject.transform.position;
             }
-            collision.gameObject.transform.SetParent(gameObject.transform);
-            collision.transform.localPosition = new Vector3(0, 0.25f, 0);
-            collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            collision.gameObject.transform.localScale = new Vector3(1.792735f, 1.792735f, 1.792735f);
-            collision.gameObject.GetComponent<SlimeMover>().enabled = false;
+            if (collision.gameObject.name == "SlimeMob" && !_MobInside)
+            {
+                _MobInside = true;
+                collision.gameObject.transform.SetParent(gameObject.transform);
+                collision.transform.localPosition = new Vector3(0, 0.25f, 0);
+                collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                collision.gameObject.transform.localScale = new Vector3(1.792735f, 1.792735f, 1.792735f);
+                collision.gameObject.GetComponent<SlimeMover>().enabled = false;
+            }
+            if (collision.gameObject.name == "FlowerMob" && !_MobInside)
+            {
+                _MobInside = true;
+                collision.gameObject.transform.SetParent(gameObject.transform);
+                collision.transform.localPosition = new Vector3(0.18f, 0.2f, 0);
+                collision.gameObject.transform.localScale = new Vector3(-6.281425f, 6.281425f, -6.281425f);
+                collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            if (collision.gameObject.name == "TurtleMob" && !_MobInside)
+            {
+                _MobInside = true;
+                collision.gameObject.transform.SetParent(gameObject.transform);
+                collision.transform.localPosition = new Vector3(0, 0.24f, 0);
+                collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                collision.gameObject.transform.localScale = new Vector3(6.024634f, 6.024634f, 6.024634f);
+                collision.gameObject.GetComponent<SlimeMover>().enabled = false;
+            }
 
         }
     }

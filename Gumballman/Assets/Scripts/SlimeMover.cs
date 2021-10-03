@@ -7,6 +7,8 @@ public class SlimeMover : MonoBehaviour
     Transform _transform;
 
     [Header("MOVEMENT VARIABLES")]
+    [SerializeField] GameObject _slimeParent;
+    [SerializeField] GameObject _slimeDestroyParticle;
     [SerializeField] Transform _firstPosition;
     [SerializeField] Transform _secondPosition;
     [SerializeField] private bool _fromFirstToSecond = true;
@@ -21,6 +23,11 @@ public class SlimeMover : MonoBehaviour
         _transform.position = _firstPosition.position;
         _transform.localScale = _firstPosition.localScale;
         _timeForDirection = 0;
+    }
+    public void Destroyer()
+    {
+        Instantiate(_slimeDestroyParticle, transform.position, Quaternion.identity);
+        Destroy(_slimeParent);
     }
 
     void Update()
@@ -45,7 +52,7 @@ public class SlimeMover : MonoBehaviour
             if (_timeForDirection < _time)
             {
                 var _normalizeTime = _timeForDirection / _time;
-                _transform.position = Vector2.Lerp(_secondPosition.position, _secondPosition.position, _normalizeTime);
+                _transform.position = Vector2.Lerp(_secondPosition.position, _firstPosition.position, _normalizeTime);
                 _timeForDirection += Time.deltaTime;
             }
             else

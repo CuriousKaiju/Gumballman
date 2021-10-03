@@ -8,6 +8,9 @@ TagManager:
   - Enemies
   - EnemyForBubble
   - BubbleStart
+  - Fire
+  - Bullet
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -23,7 +26,7 @@ TagManager:
   - Player
   - Editor
   - EnemiesWothoutCollision
-  - 
+  - Decorations
   - 
   - 
   - 
@@ -48,8 +51,14 @@ TagManager:
   - name: Back
     uniqueID: 744478037
     locked: 0
+  - name: Particles
+    uniqueID: 2208404211
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Dectorations_1
+    uniqueID: 1142552293
     locked: 0
   - name: Ground
     uniqueID: 4171479171
@@ -62,6 +71,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 63456083
+    locked: 0
+  - name: Decorations_2
+    uniqueID: 489600315
     locked: 0
   - name: UI
     uniqueID: 2972269129
