@@ -273,6 +273,10 @@ public class PlayerController : MonoBehaviour
                 collision.gameObject.GetComponent<BulletOfFlower>().Destroyer();
             }
         }
+        else if (collision.gameObject.CompareTag("Health"))
+        {
+            collision.gameObject.GetComponent<Health>().Destroyer();
+        }
     }
 
     private void BubbleSpawn()

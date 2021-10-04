@@ -22,12 +22,17 @@ public class PlayerEventsHangle : MonoBehaviour
         GameEvents.ScoreChangeEvent += OnScorePointChangeHandler;
         GameEvents.HPChangeEvent += OnHpChangeHandler;
         GameEvents.GameLose += OpenLosePopUP;
+
+        GameEvents.HPChangeEventMinus += AddHpInUI;
+        
     }
     private void OnDestroy()
     {
         GameEvents.ScoreChangeEvent -= OnScorePointChangeHandler;
         GameEvents.HPChangeEvent -= OnHpChangeHandler;
         GameEvents.GameLose -= OpenLosePopUP;
+
+        GameEvents.HPChangeEventMinus -= AddHpInUI;
     }
     private void OnScorePointChangeHandler(int score)
     {
@@ -48,5 +53,14 @@ public class PlayerEventsHangle : MonoBehaviour
     {
         _coinValueForLevel.text = "+" + _coinsValue;
         _losePopUP.SetActive(true);
+    }
+    private void AddHpInUI(int hp)
+    {
+        Debug.Log("Подобрал хп");
+        if(_HPValue < 3)
+        {
+            _HPValue += hp;
+            _helthGUI[_HPValue - 1].sprite = _HpHave;
+        }
     }
 }

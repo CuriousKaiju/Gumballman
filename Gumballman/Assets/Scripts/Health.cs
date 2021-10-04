@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public static int _playerHelth;
-    void Start()
+    [SerializeField] private GameObject _paticleBlow;
+    public void Destroyer()
     {
-        
+        Instantiate(_paticleBlow, transform.position, Quaternion.identity);
+        AddHealth();
+        Destroy(gameObject);
     }
-    void Update()
+    private void AddHealth()
     {
-        
+        GameEvents.CallHpChangeEventMinus(1);
     }
 }

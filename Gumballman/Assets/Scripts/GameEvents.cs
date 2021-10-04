@@ -10,6 +10,8 @@ public static class GameEvents
 
     public static event System.Action GameLose;
 
+    public static event System.Action<int> HPChangeEventMinus;
+
     public static void CallScoreChangeEvent(int score)
     {
        ScoreChangeEvent?.Invoke(score);
@@ -22,4 +24,9 @@ public static class GameEvents
     {
         GameLose?.Invoke();
     }
+    public static void CallHpChangeEventMinus(int hp)
+    {
+        HPChangeEventMinus?.Invoke(hp);
+    }
+
 }
