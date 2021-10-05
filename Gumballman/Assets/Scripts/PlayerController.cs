@@ -277,6 +277,10 @@ public class PlayerController : MonoBehaviour
         {
             collision.gameObject.GetComponent<Health>().Destroyer();
         }
+        else if (collision.gameObject.CompareTag("Finisher"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
+        }
     }
 
     private void BubbleSpawn()

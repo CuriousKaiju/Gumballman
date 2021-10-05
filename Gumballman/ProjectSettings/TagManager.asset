@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - Ground
   - Health
+  - Finisher
   layers:
   - Default
   - TransparentFX
